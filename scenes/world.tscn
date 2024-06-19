@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://dbqnram137cyr"]
+
+[ext_resource type="PackedScene" uid="uid://ch66vg1vktgf7" path="res://scenes/Player/player.tscn" id="1_a7670"]
+[ext_resource type="Texture2D" uid="uid://cu6nwgytdr0r" path="res://assets/placeholder-scene.png" id="1_n47kw"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_n7hs8"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ky0yy"]
+a = Vector2(107, -98)
+b = Vector2(6, 8)
+
+[node name="world" type="Node2D"]
+
+[node name="Placeholder-scene" type="Sprite2D" parent="."]
+position = Vector2(444, 94)
+texture = ExtResource("1_n47kw")
+
+[node name="Player" parent="." instance=ExtResource("1_a7670")]
+position = Vector2(232, 144)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(4, 4)
+limit_left = 0
+limit_top = 0
+limit_bottom = 180
+limit_smoothed = true
+
+[node name="World Colliders" type="StaticBody2D" parent="."]
+position = Vector2(-193, 1)
+
+[node name="bottom" type="CollisionShape2D" parent="World Colliders"]
+position = Vector2(328, 182)
+shape = SubResource("WorldBoundaryShape2D_n7hs8")
+
+[node name="top" type="CollisionShape2D" parent="World Colliders"]
+position = Vector2(362, 75)
+rotation = -3.14159
+shape = SubResource("WorldBoundaryShape2D_n7hs8")
+
+[node name="stage" type="CollisionShape2D" parent="World Colliders"]
+position = Vector2(244, 173)
+shape = SubResource("SegmentShape2D_ky0yy")
